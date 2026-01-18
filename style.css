@@ -26,7 +26,12 @@ body {
 }
 
 h1,
-h2,
+h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
 h3,
 h4,
 h5,
