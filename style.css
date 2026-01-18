@@ -586,6 +586,11 @@ img {
         display: none;
     }
 
+    .about-row.reverse .about-image,
+    .about-row:last-child .about-image {
+        display: block;
+    }
+
     .about-container {
         gap: 2rem;
     }
