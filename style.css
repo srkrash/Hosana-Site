@@ -474,8 +474,8 @@ img {
 }
 
 .contact-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 4rem;
 }
 
@@ -593,5 +593,210 @@ img {
 
     .about-container {
         gap: 2rem;
+    }
+}
+
+/* New Styles for Detailed Services */
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 900px;
+    margin: 3rem auto 0;
+}
+
+.service-detailed-item {
+    background-color: var(--bg-color);
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.service-detailed-item h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid rgba(108, 6, 4, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+.service-detailed-item p {
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.service-sub-block {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: color-mix(in srgb, var(--primary-color) 3%, white);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.service-sub-block h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.service-sub-block ul {
+    list-style-type: none;
+}
+
+.service-sub-block li {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.service-sub-block li::before {
+    content: "•";
+    color: var(--primary-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.service-note {
+    font-style: italic;
+    color: #666;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.important-note {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    padding: 2.5rem;
+    border-radius: 15px;
+    margin: 4rem auto 0;
+    max-width: 900px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(108, 6, 4, 0.2);
+}
+
+.important-note h2 {
+    color: var(--light-color);
+    margin-bottom: 1rem;
+}
+
+/* New Styles for Contact Section */
+.contact-header {
+    width: 100%;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.contact-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.contact-image-wrapper img {
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.contact-intro-text .lead {
+    font-size: 1.3rem;
+    color: var(--text-color);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.contact-info-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.info-block {
+    background: var(--bg-color);
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    height: 100%;
+}
+
+.info-block h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 1rem;
+}
+
+.info-block ul {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.info-block li {
+    margin-bottom: 0.8rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.info-block li::before {
+    content: "✓";
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.contact-action-area {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    background-color: var(--bg-color);
+    padding: 4rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    align-items: start;
+}
+
+.contact-channels h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-channels .contact-list {
+    margin: 2rem 0;
+}
+
+.contact-channels .notes {
+    margin: 1.5rem 0;
+    font-weight: 500;
+    color: #555;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.contact-quote {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    border-left: 4px solid var(--secondary-color);
+    padding-left: 1.5rem;
+    margin-top: 3rem;
+    font-style: italic;
+}
+
+@media (max-width: 900px) {
+    .contact-action-area {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+        gap: 3rem;
     }
 }
