@@ -256,14 +256,34 @@ img {
     flex: 1;
 }
 
+/* Scroll Animations */
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: none;
+}
+
+.fade-up {
+    transform: translateY(30px);
+}
+
+.fade-in {
+    opacity: 0;
+}
+
+.scale-in {
+    transform: scale(0.9);
+}
+
 .about-image img {
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.about-image img:hover {
-    transform: scale(1.02);
+    /* Hover effect removed in favor of scroll animation */
 }
 
 .about-content {
