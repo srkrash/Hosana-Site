@@ -311,16 +311,26 @@ img {
     background-color: var(--light-color);
 }
 
+.carousel-track {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
 .carousel-item {
-    display: none;
-    animation: fade 0.5s ease-in-out;
+    grid-area: 1 / 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s;
+    z-index: 0;
 }
 
 .carousel-item.active {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
 }
 
-@keyframes fade {
+/* @keyframes fade {
     from {
         opacity: .4
     }
@@ -328,7 +338,7 @@ img {
     to {
         opacity: 1
     }
-}
+} */
 
 .gallery-image-placeholder {
     width: 100%;
