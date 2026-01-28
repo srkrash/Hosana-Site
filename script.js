@@ -50,21 +50,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (nextBtn && prevBtn) {
         nextBtn.addEventListener('click', () => {
             nextSlide();
-            resetTimer();
+            stopAutoPlay();
         });
 
         prevBtn.addEventListener('click', () => {
             prevSlide();
-            resetTimer();
+            stopAutoPlay();
         });
     }
 
     // Auto Play
     let timer = setInterval(nextSlide, slideInterval);
 
-    function resetTimer() {
+    function stopAutoPlay() {
         clearInterval(timer);
-        timer = setInterval(nextSlide, slideInterval);
     }
 
     // Scroll Animation Observer
