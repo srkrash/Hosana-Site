@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Contact Form Handling
     const contactForm = document.querySelector('.contact-form');
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwTQfchb0sPeyzUgWOlnAHm6d49M2bfrhD7gvhgTiVhAoF-GRTjAJ-yZn6CoaXelY75TA/exec';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyCII56NPvQy4uJemw3w4Q2qHF5xWOlNglYtrKUk8D2aPhfdqDt1GwgE3jkpiCIdtRV/exec';
 
     if (contactForm) {
         contactForm.addEventListener('submit', function (e) {
@@ -107,29 +107,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
+                mode: 'no-cors', // Importante para evitar erros de CORS em sites estáticos
                 body: formData
             })
-                .then(response => {
-                    // Google Scripts often returns a redirect or opaque response with CORS, 
-                    // but checking connection success is usually enough for this flow.
-                    // However, our script returns JSON.
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.result === 'success') {
-                        alert('Mensagem enviada com sucesso! Em breve entrarei em contato.');
-                        contactForm.reset();
-                    } else {
-                        throw new Error(data.error || 'Erro desconhecido');
-                    }
+                .then(() => {
+                    // Com 'no-cors', não conseguimos ler a resposta JSON (response.json() falharia).
+                    // Mas se a Promise resolveu, o envio foi feito.
+                    alert('Mensagem enviada com sucesso! Em breve entrarei em contato.');
+                    contactForm.reset();
                 })
                 .catch(error => {
                     console.error('Erro:', error);
-                    // Fallback for CORS mode 'no-cors' if script was tailored differently, 
-                    // but with the provided script we expect JSON. 
-                    // Sometimes simple text response works better depending on browser.
-                    alert('Obrigada pelo contato! Sua mensagem foi enviada.');
-                    contactForm.reset();
+                    alert('Houve um erro no envio. Por favor, tente pelo WhatsApp.');
                 })
                 .finally(() => {
                     submitBtn.disabled = false;
