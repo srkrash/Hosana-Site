@@ -138,4 +138,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         });
     }
+
+    // Phone Masking
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+
+            let formattedValue = '';
+            if (value.length > 0) {
+                formattedValue = '(' + value.substring(0, 2);
+            }
+            if (value.length > 2) {
+                formattedValue += ') ' + value.substring(2, 7);
+            }
+            if (value.length > 7) {
+                formattedValue += '-' + value.substring(7, 11);
+            }
+            e.target.value = formattedValue;
+        });
+    }
 });
