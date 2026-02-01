@@ -660,12 +660,19 @@ img {
     margin: 0 auto;
 }
 
+.contact-image-wrapper {
+    /* width: 100%; Removed to allow shrink-wrap behavior for vertical image */
+    display: flex;
+    justify-content: center;
+}
+
 .contact-image-wrapper img {
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     max-height: 400px;
-    object-fit: cover;
-    width: 100%;
+    object-fit: contain;
+    width: auto;
+    max-width: 100%;
 }
 
 .contact-intro-text .lead {
