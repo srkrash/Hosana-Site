@@ -87,8 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Contact Form Handling
     const contactForm = document.querySelector('.contact-form');
-    // TODO: Substitua pela URL gerada no passo "Implantar" do Google Apps Script
-    const GOOGLE_SCRIPT_URL = 'COLE_SUA_URL_AQUI_ENTRE_AS_ASPAS';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwTQfchb0sPeyzUgWOlnAHm6d49M2bfrhD7gvhgTiVhAoF-GRTjAJ-yZn6CoaXelY75TA/exec';
 
     if (contactForm) {
         contactForm.addEventListener('submit', function (e) {
