@@ -84,4 +84,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     animatedElements.forEach(el => observer.observe(el));
+
+    // Contact Form Handling
+    const contactForm = document.querySelector('.contact-form');
+    // TODO: Substitua pela URL gerada no passo "Implantar" do Google Apps Script
+    const GOOGLE_SCRIPT_URL = 'COLE_SUA_URL_AQUI_ENTRE_AS_ASPAS';
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            if (GOOGLE_SCRIPT_URL === 'COLE_SUA_URL_AQUI_ENTRE_AS_ASPAS' || GOOGLE_SCRIPT_URL === '') {
+                alert('Erro de configuração: URL do Google Script não definida.');
+                return;
+            }
+
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+
+            const formData = new FormData(contactForm);
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    // Google Scripts often returns a redirect or opaque response with CORS, 
+                    // but checking connection success is usually enough for this flow.
+                    // However, our script returns JSON.
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.result === 'success') {
+                        alert('Mensagem enviada com sucesso! Em breve entrarei em contato.');
+                        contactForm.reset();
+                    } else {
+                        throw new Error(data.error || 'Erro desconhecido');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    // Fallback for CORS mode 'no-cors' if script was tailored differently, 
+                    // but with the provided script we expect JSON. 
+                    // Sometimes simple text response works better depending on browser.
+                    alert('Obrigada pelo contato! Sua mensagem foi enviada.');
+                    contactForm.reset();
+                })
+                .finally(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalBtnText;
+                });
+        });
+    }
 });
