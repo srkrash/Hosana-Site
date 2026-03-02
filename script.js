@@ -93,12 +93,21 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
+            const recaptchaResponse = grecaptcha.getResponse();
+            if (recaptchaResponse.length === 0) {
+                alert("Por favor, confirme que você não é um robô selecionando a caixa acima.");
+                return;
+            }
+
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.textContent;
             submitBtn.disabled = true;
             submitBtn.textContent = 'Enviando...';
 
             const formData = new FormData(contactForm);
+
+            // Adiciona a string do reCAPTCHA no envio para ser validadada pelo backend
+            formData.append('g-recaptcha-response', recaptchaResponse);
 
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
@@ -110,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Mas se a Promise resolveu, o envio foi feito.
                     alert('Mensagem enviada com sucesso! Em breve entrarei em contato.');
                     contactForm.reset();
+                    grecaptcha.reset(); // Reinicia o widget do reCAPTCHA
                 })
                 .catch(error => {
                     console.error('Erro:', error);

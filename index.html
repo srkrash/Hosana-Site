@@ -471,6 +471,18 @@
                             <label for="message">Mensagem</label>
                             <textarea id="message" name="message" rows="5" required></textarea>
                         </div>
+
+                        <!-- HONEYPOT FIELD -->
+                        <div class="form-group" style="display: none;">
+                            <label for="website_url">Não preencha este campo se for humano</label>
+                            <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <!-- WIDGET RECAPTCHA -->
+                        <div class="g-recaptcha" data-sitekey="6Le7n3wsAAAAAA92c0F2wUvdWN10V6pnMlw2SwK4"
+                            style="margin-bottom: 1.5rem;">
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
                     </form>
                 </div>
