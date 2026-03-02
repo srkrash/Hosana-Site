@@ -93,11 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            if (GOOGLE_SCRIPT_URL === 'COLE_SUA_URL_AQUI_ENTRE_AS_ASPAS' || GOOGLE_SCRIPT_URL === '') {
-                alert('Erro de configuração: URL do Google Script não definida.');
-                return;
-            }
-
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.textContent;
             submitBtn.disabled = true;
