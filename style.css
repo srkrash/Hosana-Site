@@ -952,3 +952,155 @@ img {
         height: 300px;
     }
 }
+
+/* Book Section */
+.book-launch {
+    padding: 100px 0;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.book-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.book-row {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+.book-image-col {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.book-cover {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.12));
+    transition: var(--transition);
+}
+
+.book-cover:hover {
+    transform: translateY(-8px);
+    filter: drop-shadow(0 25px 40px rgba(0, 0, 0, 0.18));
+}
+
+.book-content-col {
+    flex: 1.2;
+}
+
+.book-launch .badge {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.book-title {
+    font-size: 2.8rem;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.book-subtitle {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.book-description {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+    text-align: justify;
+    line-height: 1.7;
+}
+
+.book-highlights {
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+}
+
+.highlight-icon {
+    color: var(--secondary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1;
+    margin-top: 0.2rem;
+}
+
+.highlight-text {
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.5;
+}
+
+.book-actions {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Responsive Book Section */
+@media (max-width: 992px) {
+    .book-row {
+        flex-direction: column;
+        gap: 3rem;
+        text-align: center;
+    }
+    
+    .book-description {
+        text-align: center;
+    }
+    
+    .highlight-item {
+        text-align: left;
+    }
+    
+    .book-actions {
+        justify-content: center;
+    }
+    
+    .book-cover {
+        max-width: 60%;
+    }
+}
+
+@media (max-width: 768px) {
+    .book-launch {
+        padding: 50px 0;
+    }
+    
+    .book-title {
+        font-size: 2rem;
+    }
+    
+    .book-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .book-cover {
+        max-width: 80%;
+    }
+}

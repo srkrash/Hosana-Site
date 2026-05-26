@@ -85,16 +85,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     animatedElements.forEach(el => observer.observe(el));
 
-    // Contact Form Handling
     const contactForm = document.querySelector('.contact-form');
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyCII56NPvQy4uJemw3w4Q2qHF5xWOlNglYtrKUk8D2aPhfdqDt1GwgE3jkpiCIdtRV/exec';
+    // Usando Formsubmit para envio direto para o email
+    const FORMSUBMIT_URL = 'https://formsubmit.co/ajax/hosana.goncalves.neuropsi@gmail.com'; 
 
     if (contactForm) {
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            if (GOOGLE_SCRIPT_URL === 'COLE_SUA_URL_AQUI_ENTRE_AS_ASPAS' || GOOGLE_SCRIPT_URL === '') {
-                alert('Erro de configuração: URL do Google Script não definida.');
+            const recaptchaResponse = grecaptcha.getResponse();
+            if (recaptchaResponse.length === 0) {
+                alert("Por favor, confirme que você não é um robô selecionando a caixa acima.");
                 return;
             }
 
@@ -104,21 +105,33 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.textContent = 'Enviando...';
 
             const formData = new FormData(contactForm);
+            
+            // Campos opcionais do Formsubmit
+            formData.append('_subject', 'Novo Contato pelo Site'); // Assunto do email
+            formData.append('_captcha', 'false'); // Desativa o captcha padrão deles pois já usamos o do Google
 
-            fetch(GOOGLE_SCRIPT_URL, {
+            fetch(FORMSUBMIT_URL, {
                 method: 'POST',
-                mode: 'no-cors', // Importante para evitar erros de CORS em sites estáticos
+                headers: {
+                    'Accept': 'application/json'
+                },
                 body: formData
             })
-                .then(() => {
-                    // Com 'no-cors', não conseguimos ler a resposta JSON (response.json() falharia).
-                    // Mas se a Promise resolveu, o envio foi feito.
-                    alert('Mensagem enviada com sucesso! Em breve entrarei em contato.');
-                    contactForm.reset();
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success === "true" || data.success === true) {
+                        alert('Mensagem enviada com sucesso! Em breve entrarei em contato.');
+                        contactForm.reset();
+                        try { grecaptcha.reset(); } catch(e){}
+                    } else if (data.message && data.message.includes("Activation")) {
+                        alert('Aviso de Segurança: Um e-mail de ativação foi enviado para o seu e-mail (hosana...). Por favor, abra-o e clique em "Activate Form" para que o formulário comece a funcionar nas próximas vezes!');
+                    } else {
+                        throw new Error(data.message || 'Erro na resposta do servidor');
+                    }
                 })
                 .catch(error => {
                     console.error('Erro:', error);
-                    alert('Houve um erro no envio. Por favor, tente pelo WhatsApp.');
+                    alert('Houve um erro no envio: ' + error.message);
                 })
                 .finally(() => {
                     submitBtn.disabled = false;
